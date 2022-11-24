@@ -1,5 +1,6 @@
 # General
 bin/
+engine/stockfish_15_x64_bmi2
 
 # Godot-specific ignores
 .import/
