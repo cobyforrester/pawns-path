@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Board",
 "language": "GDScript",
-"path": "res://Board.gd"
+"path": "res://components/board/Board.gd"
 }, {
 "base": "Node",
 "class": "Engine",
@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Piece",
 "language": "GDScript",
-"path": "res://piece.gd"
+"path": "res://components/pieces/piece.gd"
 } ]
 _global_script_class_icons={
 "Board": "",

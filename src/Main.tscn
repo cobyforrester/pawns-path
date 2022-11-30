@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Board.tscn" type="PackedScene" id=1]
+[ext_resource path="res://components/board/Board.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://Alert.tscn" type="PackedScene" id=3]
 [ext_resource path="res://engine/Engine.tscn" type="PackedScene" id=4]
@@ -264,7 +264,5 @@ visible = false
 [connection signal="button_up" from="VBox/HBox/Options/TB/End" to="." method="_on_End_button_up"]
 [connection signal="toggled" from="VBox/HBox/Options/CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="button_down" from="VBox/HBox/Options/Reset" to="." method="_on_Reset_button_down"]
-[connection signal="fullmove" from="VBox/Board" to="." method="_on_Board_fullmove"]
-[connection signal="halfmove" from="VBox/Board" to="." method="_on_Board_halfmove"]
 [connection signal="done" from="Engine" to="." method="_on_Engine_done"]
 [connection signal="file_selected" from="c/FileDialog" to="." method="_on_FileDialog_file_selected"]
