@@ -2,12 +2,12 @@
 
 [ext_resource path="res://components/board/Board.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Alert.tscn" type="PackedScene" id=3]
+[ext_resource path="res://components/alert/Alert.tscn" type="PackedScene" id=3]
 [ext_resource path="res://engine/Engine.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/start.png" type="Texture" id=5]
-[ext_resource path="res://assets/end.png" type="Texture" id=6]
-[ext_resource path="res://assets/play.png" type="Texture" id=7]
-[ext_resource path="res://Promote.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/controls/start.png" type="Texture" id=5]
+[ext_resource path="res://assets/controls/end.png" type="Texture" id=6]
+[ext_resource path="res://assets/controls/play.png" type="Texture" id=7]
+[ext_resource path="res://components/pieces/Promote.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -20,9 +20,6 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 20.0
@@ -237,6 +234,7 @@ margin_left = 21.0
 margin_top = 23.0
 margin_right = 458.0
 margin_bottom = 448.0
+rect_min_size = Vector2( 400, 140 )
 access = 2
 show_hidden_files = true
 __meta__ = {

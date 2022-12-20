@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blackKing.png-078a5545eefb57f623d1f8c4a4a58b2d.stex"
+path="res://.import/blackKing.png-9109ee89d1106db2340100c6f05a0968.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/blackKing.png"
-dest_files=[ "res://.import/blackKing.png-078a5545eefb57f623d1f8c4a4a58b2d.stex" ]
+source_file="res://assets/pieces/blackKing.png"
+dest_files=[ "res://.import/blackKing.png-9109ee89d1106db2340100c6f05a0968.stex" ]
 
 [params]
 

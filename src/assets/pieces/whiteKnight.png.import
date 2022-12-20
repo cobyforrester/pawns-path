@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rewind.png-f26a024ac2475dd9cabc0fe0e5c90ea2.stex"
+path="res://.import/whiteKnight.png-09a32a346a1822359ffab8c8f80635fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rewind.png"
-dest_files=[ "res://.import/rewind.png-f26a024ac2475dd9cabc0fe0e5c90ea2.stex" ]
+source_file="res://assets/pieces/whiteKnight.png"
+dest_files=[ "res://.import/whiteKnight.png-09a32a346a1822359ffab8c8f80635fe.stex" ]
 
 [params]
 

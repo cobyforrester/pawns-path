@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blackQueen.png-5a4d189a0c2c2a8db0b7996037db6e39.stex"
+path="res://.import/whiteBishop.png-99a10c48515d21b719910fdfa5e3fb21.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/blackQueen.png"
-dest_files=[ "res://.import/blackQueen.png-5a4d189a0c2c2a8db0b7996037db6e39.stex" ]
+source_file="res://assets/pieces/whiteBishop.png"
+dest_files=[ "res://.import/whiteBishop.png-99a10c48515d21b719910fdfa5e3fb21.stex" ]
 
 [params]
 

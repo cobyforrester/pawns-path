@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/whiteKnight.png-ec31aa3cc08aaa3d9dc625fd4715c582.stex"
+path="res://.import/blackKnight.png-6cde7523d6bfb5b908b348f7cd0f7bc4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/whiteKnight.png"
-dest_files=[ "res://.import/whiteKnight.png-ec31aa3cc08aaa3d9dc625fd4715c582.stex" ]
+source_file="res://assets/pieces/blackKnight.png"
+dest_files=[ "res://.import/blackKnight.png-6cde7523d6bfb5b908b348f7cd0f7bc4.stex" ]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Alert.gd" type="Script" id=1]
+[ext_resource path="res://components/alert/Alert.gd" type="Script" id=1]
 
 [node name="Alert" type="PopupPanel"]
 margin_right = 299.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/whiteKing.png-78551170f72ac495e0aeb46d8b74a377.stex"
+path="res://.import/whiteKing.png-45468664dc674cbfb63ad85d589b1045.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/whiteKing.png"
-dest_files=[ "res://.import/whiteKing.png-78551170f72ac495e0aeb46d8b74a377.stex" ]
+source_file="res://assets/pieces/whiteKing.png"
+dest_files=[ "res://.import/whiteKing.png-45468664dc674cbfb63ad85d589b1045.stex" ]
 
 [params]
 

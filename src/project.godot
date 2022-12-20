@@ -34,11 +34,11 @@ _global_script_class_icons={
 
 config/name="Chess"
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
-Pieces="*res://Pieces.tscn"
+Pieces="*res://components/pieces/Pieces.tscn"
 
 [debug]
 

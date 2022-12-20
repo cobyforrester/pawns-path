@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blackPawn.png-cb98680e5a6d9b15646c95ecc8e40551.stex"
+path="res://.import/end.png-73ec4e2be56ce354c7a1e476da475980.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/blackPawn.png"
-dest_files=[ "res://.import/blackPawn.png-cb98680e5a6d9b15646c95ecc8e40551.stex" ]
+source_file="res://assets/controls/end.png"
+dest_files=[ "res://.import/end.png-73ec4e2be56ce354c7a1e476da475980.stex" ]
 
 [params]
 

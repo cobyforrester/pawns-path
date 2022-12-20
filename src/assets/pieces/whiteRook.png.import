@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/whiteBishop.png-4918ad69f130843e16c7d52dafbbd750.stex"
+path="res://.import/whiteRook.png-6689af80a7f55b1edca28802bacb139c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/whiteBishop.png"
-dest_files=[ "res://.import/whiteBishop.png-4918ad69f130843e16c7d52dafbbd750.stex" ]
+source_file="res://assets/pieces/whiteRook.png"
+dest_files=[ "res://.import/whiteRook.png-6689af80a7f55b1edca28802bacb139c.stex" ]
 
 [params]
 
