@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Piece",
 "language": "GDScript",
-"path": "res://components/pieces/piece.gd"
+"path": "res://components/pieces/Piece.gd"
 } ]
 _global_script_class_icons={
 "Board": "",

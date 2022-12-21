@@ -71,7 +71,6 @@ func move_to_position(move: String) -> Vector2:
 # If the user moves a piece, then the pgn move list should be wiped
 # The idea is to play back the moves of a game and take over at any point
 func pgn_to_long(pgn: String, side: String):
-	print(pgn, " ", side)
 	var m = ""
 	var ch = pgn[0]
 	# Pawn moves ignoring =Q in dxc1=Q
@@ -152,8 +151,8 @@ func find_pawn_in_col(ch, y, side):
 			return y if grid[i].key == "P" else -1
 	return -1
 
-
 func setup_pieces(_fen = default_fen):
+	fen_to_dict(_fen)
 	var parts = _fen.split(" ")
 	var next_move_white = parts.size() < 2 or parts[1] == "w"
 	var castling = "" if parts.size() < 3 else parts[2]
@@ -182,6 +181,7 @@ func setup_pieces(_fen = default_fen):
 	# Set halfmoves value
 	if parts.size() >= 5 and parts[4].is_valid_integer():
 		set_halfmoves(parts[4].to_int())
+
 	# Set fullmoves value
 	if parts.size() >= 6 and parts[5].is_valid_integer():
 		set_fullmoves(parts[5].to_int())
@@ -346,9 +346,8 @@ func hide_labels(show = false):
 func square_event(event: InputEvent, x: int, y: int):
 	if event is InputEventMouseButton:
 		get_tree().set_input_as_handled()
-		print("Clicked at: ", [x, y])
+		# print("Clicked at: ", [x, y])
 		var p = get_piece_in_grid(x, y)
-		print(p)
 		if p != null:
 			if event.pressed:
 				emit_signal("clicked", p)
@@ -606,3 +605,32 @@ func _on_HighlightTimer_timeout():
 	if highlighed_tiles.size() > 0:
 		highlight_square(highlighed_tiles[0])
 		$HighlightTimer.start()
+
+
+
+func fen_to_dict(_fen):
+	var parts = _fen.split(" ")
+	var next_move_white = parts[1] == "w"
+	var castling = parts[2]
+	var i = 0
+	for ch in parts[0]:
+		match ch:
+			"/": # Next rank
+				pass
+			"1", "2", "3", "4", "5", "6", "7", "8":
+				i += int(ch)
+			_:
+				# set_piece(ch, i, castling)
+				i += 1 
+	# Tag pawn for en passant
+	var passant = parts[3]
+	# Set halfmoves value
+	var half_moves = parts[4].to_int()
+	var full_moves = parts[5].to_int()
+	var values = {
+		"half_moves": half_moves,
+		"full_moves": full_moves,
+		"passant": passant,
+	}
+	print(values)
+
