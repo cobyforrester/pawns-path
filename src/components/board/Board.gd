@@ -608,9 +608,16 @@ func _on_HighlightTimer_timeout():
 
 
 
+## FEN format string to dict we can more easily work with
+## return type is a dictionary with:
+## half_moves: int
+## full_moves: int
+## passant: str | null
+## to_move: int
+## castling: str | null
 func fen_to_dict(_fen):
 	var parts = _fen.split(" ")
-	var next_move_white = parts[1] == "w"
+	var to_move = parts[1]
 	var castling = parts[2]
 	var i = 0
 	for ch in parts[0]:
@@ -621,9 +628,10 @@ func fen_to_dict(_fen):
 				i += int(ch)
 			_:
 				# set_piece(ch, i, castling)
-				i += 1 
+				i += 1
 	# Tag pawn for en passant
-	var passant = parts[3]
+	var passant = null if parts[3] == "-" else parts[3]
+	var castling = null if parts[2] == "-" else parts[2]
 	# Set halfmoves value
 	var half_moves = parts[4].to_int()
 	var full_moves = parts[5].to_int()
@@ -631,6 +639,8 @@ func fen_to_dict(_fen):
 		"half_moves": half_moves,
 		"full_moves": full_moves,
 		"passant": passant,
+		"to_move": to_move,
+		"castling": castling,
 	}
 	print(values)
 
