@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://components/board/Board.gd"
 }, {
+"base": "Reference",
+"class": "BoardState",
+"language": "GDScript",
+"path": "res://components/board/BoardState.gd"
+}, {
 "base": "Node",
 "class": "Engine",
 "language": "GDScript",
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Board": "",
+"BoardState": "",
 "Engine": "",
 "Piece": ""
 }

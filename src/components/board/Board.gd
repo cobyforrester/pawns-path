@@ -14,23 +14,28 @@ export(Color) var white # Square color
 export(Color) var grey # Square color
 export(Color) var mod_color # For highlighting squares
 
+
 const num_squares = 64
 enum { SIDE, UNDER }
 
-var grid : Array # Map of what pieces are placed on the board
+var grid: Array # Map of what pieces are placed on the board
+var default_fen: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0"
 var r_count = 0 # Rook counter
 var R_count = 0 # Rook counter
 var halfmoves = 0 # Used with fifty-move rule. Reset after pawn move or piece capture
 var fullmoves = 0 # Incremented after Black's move
-var passant_pawn : Piece
+var passant_pawn: Piece
 var kings = {}
 var fen = ""
-var default_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0"
 var cleared = true
 var highlighed_tiles = []
+var board_state: BoardState
 
 func _ready():
 	# grid will map the pieces in the game
+	board_state = BoardState.new()
+	board_state.setup()
+	print(board_state.board)
 	grid.resize(num_squares)
 	draw_tiles()
 	#hide_labels()
@@ -152,7 +157,6 @@ func find_pawn_in_col(ch, y, side):
 	return -1
 
 func setup_pieces(_fen = default_fen):
-	fen_to_dict(_fen)
 	var parts = _fen.split(" ")
 	var next_move_white = parts.size() < 2 or parts[1] == "w"
 	var castling = "" if parts.size() < 3 else parts[2]
@@ -607,40 +611,4 @@ func _on_HighlightTimer_timeout():
 		$HighlightTimer.start()
 
 
-
-## FEN format string to dict we can more easily work with
-## return type is a dictionary with:
-## half_moves: int
-## full_moves: int
-## passant: str | null
-## to_move: int
-## castling: str | null
-func fen_to_dict(_fen):
-	var parts = _fen.split(" ")
-	var to_move = parts[1]
-	var castling = parts[2]
-	var i = 0
-	for ch in parts[0]:
-		match ch:
-			"/": # Next rank
-				pass
-			"1", "2", "3", "4", "5", "6", "7", "8":
-				i += int(ch)
-			_:
-				# set_piece(ch, i, castling)
-				i += 1
-	# Tag pawn for en passant
-	var passant = null if parts[3] == "-" else parts[3]
-	var castling = null if parts[2] == "-" else parts[2]
-	# Set halfmoves value
-	var half_moves = parts[4].to_int()
-	var full_moves = parts[5].to_int()
-	var values = {
-		"half_moves": half_moves,
-		"full_moves": full_moves,
-		"passant": passant,
-		"to_move": to_move,
-		"castling": castling,
-	}
-	print(values)
 
