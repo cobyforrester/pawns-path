@@ -35,7 +35,6 @@ func _ready():
 	# grid will map the pieces in the game
 	board_state = BoardState.new()
 	board_state.setup()
-	print(board_state.board)
 	grid.resize(num_squares)
 	draw_tiles()
 	#hide_labels()
