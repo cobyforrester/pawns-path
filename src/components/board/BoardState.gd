@@ -144,6 +144,32 @@ func _pawn_moves(y, x):
 		possible_moves.append(coordinates_to_notation(y + direction, x-1))
 	return possible_moves
 
+# calculate legal rook moves
+func _rook_moves(y, x):
+	var rook = grid[y][x]
+	var side = rook.side
+	var possible_moves = []
+	var height = grid.size() 
+	var width = grid[y].size() 
+	# check all directions rook can move, am I stupid or does this work well?
+	var permutations = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+	var y_perm = y
+	var x_perm = x
+	for permutation in permutations:
+		y_perm = y + permutation[1]
+		x_perm = x + permutation[0]
+		while(x < height && x >= 0 && y < width && y > 0):
+			possible_moves.append(coordinates_to_notation(y + direction, x-1))
+
+
+# check all directions piece can move, am I stupid or does this work well?
+func _infinite_direction_permutations(permutations: Array, piece: Piece, height = 8, width = 8):
+	var side = piece.side
+
+
+
+
+
 
 # returns chess format, for example: e4
 # coordinates is array with two elements, one for width one for height
