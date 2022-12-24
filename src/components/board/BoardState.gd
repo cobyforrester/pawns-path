@@ -106,15 +106,25 @@ func _state_to_fen():
 func compute_legal_moves():
 	var _legal_moves = {}
 	# initialize dictionary of positions to moves list
+	var rook_translations = [[0,1], [0, -1], [1, 0], [-1, 0]]
+	var bishop_translations = [[1,1], [-1, -1], [-1, 1], [1, -1]]
+	var queen_translations = rook_translations + bishop_translations
 	for i in grid.size():
 		for j in grid[i].size():
 			var notation = coordinates_to_notation(i, j, grid[i].size())
 			if grid[i][j] != null:
 				match grid[i][j].key.to_lower():
-					"p": # Next rank
+					"p": # pawn
 						_legal_moves[notation] = _pawn_moves(i, j)
 						pass
-					"f": # Next rank
+					"r": # rook
+						_legal_moves[notation] = _infinite_direction_translations(i, j, rook_translations)
+						pass
+					"b": # bishop
+						_legal_moves[notation] = _infinite_direction_translations(i, j, bishop_translations)
+						pass
+					"q": # queen
+						_legal_moves[notation] = _infinite_direction_translations(i, j, queen_translations)
 						pass
 
 # calculate legal pawn moves for pawn
@@ -144,27 +154,39 @@ func _pawn_moves(y, x):
 		possible_moves.append(coordinates_to_notation(y + direction, x-1))
 	return possible_moves
 
-# calculate legal rook moves
-func _rook_moves(y, x):
-	var rook = grid[y][x]
-	var side = rook.side
+# check all directions piece can move, am I stupid or does this work well?
+# it takes an array of numbers to transform the x and y values
+# then checks common conditions all pieces that move
+# infinitely in one direction need to account for
+# am I on the board, is there a piece here, etc.
+# this greatly reduces the code for bishops, rooks, and queens
+func _infinite_direction_translations(y, x, translations: Array):
+	var piece = grid[y][x]
+	var side = piece.side
 	var possible_moves = []
 	var height = grid.size() 
 	var width = grid[y].size() 
-	# check all directions rook can move, am I stupid or does this work well?
-	var permutations = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-	var y_perm = y
-	var x_perm = x
-	for permutation in permutations:
-		y_perm = y + permutation[1]
-		x_perm = x + permutation[0]
-		while(x < height && x >= 0 && y < width && y > 0):
-			possible_moves.append(coordinates_to_notation(y + direction, x-1))
+	# check all directions piece can move, am I stupid or does this work well?
+	var y_tr = y
+	var x_tr = x
+	for translation in translations:
+		y_tr = y + translation[1]
+		x_tr = x + translation[0]
+		while(x_tr < height && x_tr >= 0 && y_tr < width && y_tr > 0):
+			if grid[y_tr][x_tr] != null:
+				# if we hit a piece, add and break if opposite colors, otherwise just break
+				if grid[y_tr][x_tr].side != side:
+					possible_moves.append(coordinates_to_notation(y_tr, x_tr))
+				break
+			else:
+				possible_moves.append(coordinates_to_notation(y_tr, x_tr))
+			y_tr += translation[1]
+			x_tr += translation[0]
+		
+	print(piece.key)
+	print(possible_moves)
+	return possible_moves
 
-
-# check all directions piece can move, am I stupid or does this work well?
-func _infinite_direction_permutations(permutations: Array, piece: Piece, height = 8, width = 8):
-	var side = piece.side
 
 
 
