@@ -115,35 +115,34 @@ func compute_legal_moves():
 						_legal_moves[notation] = _pawn_moves(i, j)
 						pass
 					"f": # Next rank
-						_legal_moves[notation] = _pawn_moves(i, j)
 						pass
 
 # calculate legal pawn moves for pawn
 # don't need to account for it going out
 # of bounds since it becomes another piece
 # before then
-func _pawn_moves(x, y):
-	var pawn = grid[x][y]
+func _pawn_moves(y, x):
+	var pawn = grid[y][x]
 	var direction = 1 if pawn.side.to_lower() == "b" else -1
 	var possible_moves = []
 	# move forward
-	if grid[x + direction][y] == null:
-		possible_moves.append(coordinates_to_notation(x + direction, y))
-		if grid[x + direction * 2][y] == null:
-			possible_moves.append(coordinates_to_notation(x + direction * 2, y))
+	if grid[y + direction][x] == null:
+		possible_moves.append(coordinates_to_notation(y + direction, x))
+		if grid[y + direction * 2][x] == null: # check if not moved
+			possible_moves.append(coordinates_to_notation(y + direction * 2, x))
 	# move right one (white perspective)
-	if grid[x + direction].size() > y + 1 && grid[x + direction][y + 1] != null && grid[x + direction][y + 1].side != pawn.side:
-		possible_moves.append(coordinates_to_notation(x + direction, y+1))
+	if grid[y + direction].size() > x + 1 && grid[y + direction][x + 1] != null && grid[y + direction][x + 1].side != pawn.side:
+		possible_moves.append(coordinates_to_notation(y + direction, x+1))
 	# move left one (white perspective)
-	if y - 1 >= 0 && grid[x + direction][y - 1] != null && grid[x + direction][y - 1].side != pawn.side:
-		possible_moves.append(coordinates_to_notation(x + direction, y-1))
+	if x - 1 >= 0 && grid[y + direction][x - 1] != null && grid[y + direction][x - 1].side != pawn.side:
+		possible_moves.append(coordinates_to_notation(y + direction, x-1))
 	print(possible_moves)
 
 
 # returns chess format, for example: e4
 # coordinates is array with two elements, one for width one for height
-func coordinates_to_notation(x, y, width = 8):
-	var letter = char(97 + y)
-	var num = width - x
+func coordinates_to_notation(y, x, height = 8):
+	var letter = char(97 + x)
+	var num = height - y
 	return str(letter) + str(num)
 
