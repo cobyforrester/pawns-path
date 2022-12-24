@@ -5,6 +5,7 @@ class_name BoardState
 #### static vars ####
 var num_squares: int # number of squares for board
 var square_width: int # pixels (same as chess piece images)
+var show_labels: bool
 
 #### computed vars (from fen) ####
 var half_moves: int
@@ -26,12 +27,14 @@ var default_fen: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 
 func setup(
 	_fen: String = default_fen, 
 	_num_squares: int = 64,
-	_square_width: int = 64):
+	_square_width: int = 64,
+	_show_labels: bool = true):
 	fen = _fen
 	num_squares = _num_squares
 	square_width = _square_width
+	show_labels = _show_labels
+	legal_moves = compute_legal_moves()
 	_parse_fen_set_state()
-	compute_legal_moves()
 
 
 ## use FEN to set class variables, sets:
@@ -62,7 +65,7 @@ func _parse_fen_set_state():
 					p.side = "w"
 				else:
 					p.side = "b"
-				p.key = ch
+				p.key = ch.to_lower()
 				_grid[i].append(p)
 	grid = _grid
 	to_move = parts[1]
@@ -86,7 +89,10 @@ func _state_to_fen():
 				if null_count != 0:
 					grid_str += str(null_count)
 					null_count = 0
-				grid_str += col.key
+				if col. side == "w":
+					grid_str += col.key.to_upper()
+				else:
+					grid_str += col.key.to_lower()
 		if null_count != 0:
 			grid_str += str(null_count)
 		grid_str += "/"
@@ -134,6 +140,7 @@ func compute_legal_moves():
 					"k": # king
 						_legal_moves[notation] = _single_point_translation(i, j, q_and_k_translations)
 						pass
+	return _legal_moves
 
 # calculate legal pawn moves for pawn
 # don't need to account for it going out
@@ -189,8 +196,8 @@ func _infinite_direction_translations(y, x, translations: Array):
 				break
 			else:
 				possible_moves.append(coordinates_to_notation(y_tr, x_tr))
-			y_tr += translation[1]
-			x_tr += translation[0]
+			y_tr += translation[0]
+			x_tr += translation[1]
 	return possible_moves
 
 # translations is array of format [y, x] but actually for now never matters
@@ -212,9 +219,7 @@ func _single_point_translation(y, x, translations: Array):
 					possible_moves.append(coordinates_to_notation(y_tr, x_tr))
 			else:
 				possible_moves.append(coordinates_to_notation(y_tr, x_tr))
-	print(possible_moves)
 	return possible_moves
-
 
 # returns chess format, for example: e4
 # coordinates is array with two elements, one for width one for height

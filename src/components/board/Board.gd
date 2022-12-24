@@ -252,6 +252,7 @@ func set_piece(key: String, i: int, castling: String):
 	p.obj = Pieces.get_piece(p.key, p.side)
 	grid[i] = p
 	$Grid.get_child(i).add_child(p.obj)
+	print($Grid.get_child(i))
 	# Check castling rights
 	match key:
 		"r":

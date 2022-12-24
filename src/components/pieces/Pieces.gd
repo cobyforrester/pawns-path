@@ -2,12 +2,12 @@
 
 extends GridContainer
 
-var keys = "BKNPQR" # Bishop King kNight Pawn Queen Rook
+var keys = "bknpqr" # Bishop King kNight Pawn Queen Rook
 
 # Return a chess piece object defaulting to a White Pawn
-func get_piece(key = "P", side = "W"):
-	var i = keys.find(key)
-	if side == "W":
+func get_piece(key = "p", side = "w"):
+	var i = keys.find(key.to_lower())
+	if side.to_lower() == "w":
 		i += 6
 	var p = get_child(i).duplicate()
 	p.position = Vector2(0, 0)
