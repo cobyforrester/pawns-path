@@ -14,8 +14,6 @@ export(Color) var white # Square color
 export(Color) var grey # Square color
 export(Color) var mod_color # For highlighting squares
 
-
-const num_squares = 64
 enum { SIDE, UNDER }
 
 var grid: Array # Map of what pieces are placed on the board
@@ -35,7 +33,7 @@ func _ready():
 	# grid will map the pieces in the game
 	board_state = BoardState.new()
 	board_state.setup()
-	grid.resize(num_squares)
+	grid.resize(board_state.num_squares)
 	draw_tiles()
 	#hide_labels()
 	# Set board layout using Forsyth Edwards encoded string
@@ -505,7 +503,7 @@ func can_attack(x, y, side, key):
 
 func highlight_square(n: int, apply = true):
 	assert(n >= 0)
-	assert(n < num_squares)
+	assert(n < board_state.num_squares)
 	var sqr: ColorRect = $Grid.get_child(n)
 	if apply:
 		sqr.color = mod_color
