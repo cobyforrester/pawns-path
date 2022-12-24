@@ -125,18 +125,24 @@ func _pawn_moves(y, x):
 	var pawn = grid[y][x]
 	var direction = 1 if pawn.side.to_lower() == "b" else -1
 	var possible_moves = []
-	# move forward
+	# move forward one space
 	if grid[y + direction][x] == null:
 		possible_moves.append(coordinates_to_notation(y + direction, x))
-		if grid[y + direction * 2][x] == null: # check if not moved
+		# move forward two spaces
+		if (grid[y + direction * 2][x] == null 
+			&& ((pawn.side == "b" && y == 1) 
+					|| (pawn.side == "w" && y == grid[y].size() - 2))): # check if not moved
 			possible_moves.append(coordinates_to_notation(y + direction * 2, x))
 	# move right one (white perspective)
-	if grid[y + direction].size() > x + 1 && grid[y + direction][x + 1] != null && grid[y + direction][x + 1].side != pawn.side:
+	if (grid[y + direction].size() > x + 1 
+			&& grid[y + direction][x + 1] != null 
+			&& grid[y + direction][x + 1].side != pawn.side):
 		possible_moves.append(coordinates_to_notation(y + direction, x+1))
 	# move left one (white perspective)
-	if x - 1 >= 0 && grid[y + direction][x - 1] != null && grid[y + direction][x - 1].side != pawn.side:
+	if (x - 1 >= 0 && grid[y + direction][x - 1] != null 
+			&& grid[y + direction][x - 1].side != pawn.side):
 		possible_moves.append(coordinates_to_notation(y + direction, x-1))
-	print(possible_moves)
+	return possible_moves
 
 
 # returns chess format, for example: e4
