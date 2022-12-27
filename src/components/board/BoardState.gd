@@ -227,4 +227,3 @@ func coordinates_to_notation(y, x, height = 8):
 	var letter = char(97 + x)
 	var num = height - y
 	return str(letter) + str(num)
-
