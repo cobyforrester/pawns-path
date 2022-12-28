@@ -227,3 +227,13 @@ func coordinates_to_notation(y, x, height = 8):
 	var letter = char(97 + x)
 	var num = height - y
 	return str(letter) + str(num)
+
+# turns x, y coordinates to i coordinates
+# to translate my personal grid to what
+# Grid from godot expects
+func x_y_to_i(x, y, _height = 8):
+	return _height * y + x
+
+# get piece from the grid
+func get_piece(x: int, y: int):
+	return grid[y][x]

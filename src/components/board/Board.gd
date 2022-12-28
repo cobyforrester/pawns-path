@@ -16,9 +16,6 @@ export(Color) var mod_color # For highlighting squares
 enum { SIDE, UNDER }
 
 var grid: Array # Map of what pieces are placed on the board
-var default_fen: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0"
-var r_count = 0 # Rook counter
-var R_count = 0 # Rook counter
 var halfmoves = 0 # Used with fifty-move rule. Reset after pawn move or piece capture
 var fullmoves = 0 # Incremented after Black's move
 var passant_pawn: Piece
@@ -36,22 +33,18 @@ func _ready():
 
 
 
-func setup_pieces(_fen = default_fen):
-	var i = 0
-	for row in board_state.grid:
-		for piece in row:
-			if piece != null:
-				set_piece(piece, i)
-			i += 1 
+func setup_pieces():
+	var _grid = board_state.grid
+	for y in _grid.size():
+		for x in _grid[y].size():
+			if _grid[y][x] != null:
+				set_piece(_grid[y][x], x, y)
 
 
-func set_piece(p: Piece, i: int):
+func set_piece(p: Piece, x: int, y: int):
+	var i = board_state.x_y_to_i(x, y)
 	p.pos = Vector2(i % 8, int(i / 8.0)) # godot hack
 	p.obj = Pieces.get_piece(p.key, p.side)
-	grid[i] = p
-	print("========================")
-	print(grid)
-	print("========================")
 	$Grid.get_child(i).add_child(p.obj)
 	# Check castling rights
 
@@ -114,7 +107,7 @@ func square_event(event: InputEvent, x: int, y: int):
 	if event is InputEventMouseButton:
 		get_tree().set_input_as_handled()
 		print("Clicked at: ", [x, y])
-		var p = get_piece_in_grid(x, y)
+		var p = board_state.get_piece(x, y)
 		if p != null:
 			if event.pressed:
 				emit_signal("clicked", p)
